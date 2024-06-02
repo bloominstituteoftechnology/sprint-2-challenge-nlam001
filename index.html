@@ -5,11 +5,15 @@
 <script id="challenge">
 // 👉 CHALLENGE 1
 function profileActivation(profile, reason) {
+  if (profile.active ==true && !reason ){
+    return "confirm status manually" ;
+  }
     if (reason) {
         profile.reason = reason;
         profile.active = false;
     } else {
         profile.active = true;
+        delete profile.reason
     }
     return profile;
 }
@@ -25,13 +29,25 @@ function mineSweeper(grid, x, y) {
 
 // 👉 CHALLENGE 3
 function booleanize(obj) {
-    const newObj = {};
+    
     for (let key in obj) {
-        if (obj[key] !== null) {
-            newObj[key] = Boolean(obj[key]);
-        }
+if (key.length > 9){
+  return "shorten all prop names to 9 chars or less";
+}
+if (typeof obj[key] === "number"){
+  if(obj[key] === 1 ){
+obj[key] = true;
+}
+if(obj[key] === 0 ){
+obj[key] = false;
+}
+}
+if (obj[key] === null) {
+  delete obj[key];
+}
+
     }
-    return newObj;
+    return obj;
 }
 
 // 👉 CHALLENGE 4
